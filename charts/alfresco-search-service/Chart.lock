@@ -3,7 +3,7 @@ dependencies:
   repository: ""
   version: 2.2.0
 - name: alfresco-common
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 2.1.0
-digest: sha256:d936b2a9611e46791878d3a7ead2d61fc97e65e343955aeb247b4709f124a725
-generated: "2023-09-13T17:05:38.325916+02:00"
+digest: sha256:6262d7572a2d7a07ce56e41c71f416d61d5037d87055d53dee966647f5a30e4a
+generated: "2023-12-20T20:53:35.765835667Z"
