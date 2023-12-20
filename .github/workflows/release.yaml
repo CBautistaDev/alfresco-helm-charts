@@ -28,19 +28,30 @@ jobs:
 
       - name: Custom Packaging
         run: |
-          VERSION=${{ github.ref_name }}
+          REF_NAME=${{ github.ref_name }}
+          VERSION_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+$"
+          DEFAULT_VERSION="1.0.0" # Default version if REF_NAME is not SemVer
+
+          if [[ $REF_NAME =~ $VERSION_REGEX ]]; then
+            VERSION=${REF_NAME:1} # Strip the 'v' prefix
+          else
+            echo "Ref name $REF_NAME is not SemVer, using default version $DEFAULT_VERSION"
+            VERSION=$DEFAULT_VERSION
+          fi
+
           rm -rf .cr-release-packages
           mkdir -p .cr-release-packages
           for dir in charts/*; do
             if [ -d "$dir" ]; then
               if [ -f "$dir/Chart.yaml" ]; then
                 echo "Packaging chart in $dir"
-                helm package "$dir" --app-version=${VERSION:1} --version=${VERSION:1} --destination=.cr-release-packages
+                helm package "$dir" --app-version=$VERSION --version=$VERSION --destination=.cr-release-packages
               else
                 echo "Skipping $dir, Chart.yaml not found"
               fi
             fi
           done
+
 
 
       - name: Run chart-releaser
