@@ -7,7 +7,7 @@ BASE_DIR="."
 update_chart_dependencies() {
     local chart_dir=$1
     echo "Updating dependencies for chart in directory: $chart_dir"
-    helm dependency update "$chart_dir"
+    helm package "$chart_dir"
 }
 
 # Export the function so it can be used by find -exec
