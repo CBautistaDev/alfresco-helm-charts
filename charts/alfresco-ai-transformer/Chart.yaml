@@ -7,9 +7,9 @@ appVersion: 3.0.1
 dependencies:
   - name: alfresco-common
     version: 3.1.0
-    repository: https://alfresco.github.io/alfresco-helm-charts/
+    repository: https://cbautistadev.github.io/alfresco-helm-charts/
   - name: activemq
     version: 3.4.1
-    repository: https://alfresco.github.io/alfresco-helm-charts/
+    repository: https://cbautistadev.github.io/alfresco-helm-charts/
     tags:
       - ci
