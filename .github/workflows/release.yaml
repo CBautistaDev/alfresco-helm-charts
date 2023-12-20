@@ -26,12 +26,22 @@ jobs:
         with:
           version: v3.8.1
 
-      - name: custom packaging
+      - name: Custom Packaging
         run: |
-          VERSION=${{github.ref_name}}
+          VERSION=${{ github.ref_name }}
           rm -rf .cr-release-packages
           mkdir -p .cr-release-packages
-          helm package charts/ --app-version=${VERSION:1} --version=${VERSION:1} --destination=.cr-release-packages
+          for dir in charts/*; do
+            if [ -d "$dir" ]; then
+              if [ -f "$dir/Chart.yaml" ]; then
+                echo "Packaging chart in $dir"
+                helm package "$dir" --app-version=${VERSION:1} --version=${VERSION:1} --destination=.cr-release-packages
+              else
+                echo "Skipping $dir, Chart.yaml not found"
+              fi
+            fi
+          done
+
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
