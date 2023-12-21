@@ -9,11 +9,7 @@ dependencies:
   - name: alfresco-common
     version: 3.1.0
     repository: https://alfresco.github.io/alfresco-helm-charts/
-  - name: activemq
-    version: 3.3.0
-    repository: "file://../activemq"
-    tags:
-      - ci
+
   - name: elasticsearch
     repository: https://helm.elastic.co
     version: 7.17.3
