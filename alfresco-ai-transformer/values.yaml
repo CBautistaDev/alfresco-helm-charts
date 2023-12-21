@@ -1,0 +1,92 @@
+global:
+  alfrescoRegistryPullSecrets: quay-registry-secret
+strategy:
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+replicaCount: 2
+nodeSelector: {}
+image:
+  repository: quay.io/alfresco/alfresco-ai-docker-engine
+  tag: 3.0.1
+  pullPolicy: IfNotPresent
+  internalPort: 8090
+service:
+  name: ai-transformer
+  type: ClusterIP
+  externalPort: 80
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ai-transformer-sa
+podSecurityContext:
+  runAsUser: 33015
+resources:
+  requests:
+    cpu: "0.25"
+    memory: "1000Mi"
+  limits:
+    cpu: "2"
+    memory: "1000Mi"
+environment:
+  JAVA_OPTS: >-
+    -XX:MinRAMPercentage=50
+    -XX:MaxRAMPercentage=80
+readinessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 60
+  timeoutSeconds: 10
+livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 20
+  timeoutSeconds: 10
+  livenessPercent: 400
+  livenessTransformPeriodSeconds: 600
+  maxTransforms: 10000
+  maxTransformSeconds: 1800
+sfs:
+  # -- Alfresco Transformation filestore (e.g. http://acs-alfresco-transform-service)
+  url: null
+  existingConfigMap:
+    name: null
+    keys:
+      url: FILE_STORE_URL
+aws:
+  # -- AWS credentials are required as documented at https://docs.alfresco.com/intelligence-services/latest/config/#default-configuration
+  accessKeyId: null
+  secretAccessKey: null
+  region: null
+  s3Bucket: null
+  comprehendRoleARN: null
+  existingConfigMap:
+    name: null
+    keys:
+      region: AWS_REGION
+      s3Bucket: AWS_S3_BUCKET
+      comprehendRoleARN: AWS_COMPREHEND_ROLE_ARN
+  existingSecret:
+    name: null
+    keys:
+      accessKeyId: AWS_ACCESS_KEY_ID
+      secretAccessKey: AWS_SECRET_ACCESS_KEY
+messageBroker:
+  url: null
+  user: null
+  password: null
+  # -- Alternatively, provide credentials via an existing secret and set the keys as they are given
+  existingConfigMap:
+    name: null
+    keys:
+      url: BROKER_URL
+  existingSecret:
+    name: null
+    keys:
+      username: BROKER_USERNAME
+      password: BROKER_PASSWORD
+tags:
+  # -- A chart tag used for Hyland's CI purpose. Do not set it to true.
+  ci: false

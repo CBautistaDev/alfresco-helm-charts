@@ -1,0 +1,37 @@
+---
+suite: test ingress
+templates:
+  - ingress.yaml
+tests:
+  - it: should have basic metadata in place
+    values: &testvalues
+      - values/test_values.yaml
+      - values/ingress.yaml
+    asserts:
+      - equal:
+          path: metadata.name
+          value: RELEASE-NAME-alfresco-search-service-solr
+        template: ingress.yaml
+      - equal:
+          path: metadata.annotations['nginx.ingress.kubernetes.io/auth-secret']
+          value: staging/solradmin
+        template: ingress.yaml
+      - equal:
+          path: metadata.annotations['nginx.ingress.kubernetes.io/enable-cors']
+          value: true
+        template: ingress.yaml
+      - equal:
+          path: metadata.annotations['nginx.ingress.kubernetes.io/auth-type']
+          value: basic
+        template: ingress.yaml
+
+  - it: should reference the existing secret
+    set:
+      ingress:
+        enabled: true
+        existingSecretName: my-custom-ingress-secret
+    asserts:
+      - equal:
+          path: metadata.annotations['nginx.ingress.kubernetes.io/auth-secret']
+          value: my-custom-ingress-secret
+        template: ingress.yaml

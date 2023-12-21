@@ -1,0 +1,151 @@
+---
+suite: test liveindexing template rendering
+templates:
+  - configmap-ats.yaml
+  - configmap-elasticsearch.yaml
+  - liveindexing-deployment.yaml
+  - secret-elasticsearch.yaml
+  - secret-database.yaml
+  - secret-messagebroker.yaml
+tests:
+  - it: |
+      Render elasticsearch Liveindexing configmap,
+      using provided values and check deployment has appropriate defaults
+    values: &testvalues
+      - values/embedded-charts-values.yaml
+    template: liveindexing-deployment.yaml
+    asserts:
+      - equal:
+          path: data.SEARCH_URL
+          value: http://elasticsearch-master:9200
+        template: configmap-elasticsearch.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: BROKER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: RELEASE-NAME-alfresco-search-enterprise-mq
+                key: BROKER_URL
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SPRING_ELASTICSEARCH_REST_URIS
+            valueFrom:
+              configMapKeyRef:
+                name: RELEASE-NAME-alfresco-search-enterprise-es
+                key: SEARCH_URL
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SPRING_ELASTICSEARCH_REST_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: RELEASE-NAME-alfresco-search-enterprise-es
+                key: SEARCH_USERNAME
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SPRING_ELASTICSEARCH_REST_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: RELEASE-NAME-alfresco-search-enterprise-es
+                key: SEARCH_PASSWORD
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: ALFRESCO_ACCEPTEDCONTENTMEDIATYPESCACHE_BASEURL
+            valueFrom:
+              configMapKeyRef:
+                name: RELEASE-NAME-alfresco-search-enterprise-ats
+                key: ATS_URL
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: ALFRESCO_SHAREDFILESTORE_BASEURL
+            valueFrom:
+              configMapKeyRef:
+                name: RELEASE-NAME-alfresco-search-enterprise-ats
+                key: SFS_URL
+
+  - it: |
+      Render default mainfest with embedded elasticsearch and pre-existing secret
+    values: *testvalues
+    template: liveindexing-deployment.yaml
+    set:
+      search:
+        existingConfigMap:
+          name: escm
+          keys:
+            url: ESURL
+        existingSecret:
+          name: nooneknows
+          keys:
+            username: ESUSER
+            password: ESPASS
+      messageBroker:
+        existingConfigMap:
+          name: mymqcm
+          keys:
+            url: MQ_URL
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: BROKER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: mymqcm
+                key: MQ_URL
+      - equal:
+          path: data.ATS_URL
+          value: http://transform/transform/config
+        template: configmap-ats.yaml
+      - equal:
+          path: data.SFS_URL
+          value: http://sfs/alfresco/api/-default-/private/sfs/versions/1/file/
+        template: configmap-ats.yaml
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SPRING_ELASTICSEARCH_REST_URIS
+            valueFrom:
+              configMapKeyRef:
+                name: escm
+                key: ESURL
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SPRING_ELASTICSEARCH_REST_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: nooneknows
+                key: ESUSER
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: SPRING_ELASTICSEARCH_REST_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: nooneknows
+                key: ESPASS
+      - equal:
+          path: spec.template.spec.containers[0].resources
+          value:
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+            limits:
+              cpu: "2"
+              memory: "2048Mi"
+
+  - it: render nodeSelector properly
+    values: *testvalues
+    set:
+      nodeSelector:
+        node_label: node_value
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector.node_label
+          value: node_value
+        template: liveindexing-deployment.yaml
