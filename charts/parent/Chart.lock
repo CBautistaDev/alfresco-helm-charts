@@ -18,7 +18,7 @@ dependencies:
   repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 3.4.1
 - name: alfresco-transform-service
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 0.3.2
 - name: alfresco-search-service
   repository: https://alfresco.github.io/alfresco-helm-charts/
@@ -44,5 +44,5 @@ dependencies:
 - name: elasticsearch
   repository: https://helm.elastic.co
   version: 7.17.3
-digest: sha256:c43b18bfe5b567c8cb5b7538c1dbb03ce018a7789742cfac110e2581866161da
-generated: "2023-12-21T15:00:44.06106-08:00"
+digest: sha256:2d8dfaf0178140151bb98f24cbb4fcba78af1fd9d469a4bef61f49dc04fcf513
+generated: "2023-12-21T15:50:22.431608-08:00"
