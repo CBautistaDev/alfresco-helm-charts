@@ -1,6 +1,0 @@
----
-activemq:
-  enabled: true
-  adminUser:
-    user: alfresco
-    password: somesecret
