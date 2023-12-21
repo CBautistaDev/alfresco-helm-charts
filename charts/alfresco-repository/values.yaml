@@ -199,11 +199,7 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: "alfresco-repo-sa"
 podAnnotations: {}
-podSecurityContext:
-  runAsNonRoot: true
-  runAsUser: 33000
-  runAsGroup: 1000
-  fsGroup: 1000
+
 securityContext: {}
 service:
   name: repository

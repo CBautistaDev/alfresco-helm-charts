@@ -13,11 +13,7 @@ nodeSelector: {}
 # More information can be found on
 # https://github.com/Alfresco/acs-deployment/blob/master/docs/helm/registry-authentication.md
 type: search-services
-podSecurityContext:
-  runAsNonRoot: true
-  runAsUser: 33007
-  runAsGroup: 33007
-  fsGroup: 33007
+
 searchServicesImage:
   repository: quay.io/alfresco/search-services
   tag: 2.0.8.2

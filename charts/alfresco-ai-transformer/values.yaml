@@ -22,9 +22,7 @@ serviceAccount:
   annotations: {}
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ai-transformer-sa
-podSecurityContext:
-  runAsUser: 33015
+  name: ai-transformer-sas
 resources:
   requests:
     cpu: "0.25"

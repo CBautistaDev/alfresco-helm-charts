@@ -19,9 +19,7 @@ ingress:
   path: /ooi-service
   tls: []
   extraAnnotations: {}
-podSecurityContext:
-  runAsNonRoot: true
-  runAsUser: 33006
+
 resources:
   requests:
     cpu: "0.25"

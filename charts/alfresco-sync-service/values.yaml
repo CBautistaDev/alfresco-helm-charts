@@ -17,11 +17,7 @@ global:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-podSecurityContext:
-  runAsUser: 33020
-  runAsGroup: 1000
-  runAsNonRoot: true
-  fsGroup: 1000
+
 image:
   repository: quay.io/alfresco/service-sync
   tag: 4.0.1

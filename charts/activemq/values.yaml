@@ -13,10 +13,6 @@ adminUser:
   user: admin
   # -- Password for the default user with administrative privileges
   password: admin
-podSecurityContext:
-  runAsUser: 33031
-  runAsGroup: 1000
-  fsGroup: 1000
 resources:
   requests:
     cpu: "0.25"
