@@ -1,5 +1,5 @@
 # Helm chart automated files
-*.tgz
+
 .idea
 .DS_Store
 
