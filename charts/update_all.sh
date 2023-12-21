@@ -28,3 +28,8 @@ package_chart_dependencies() {
 export -f package_chart_dependencies
 
 find "$BASE_DIR" -name Chart.yaml -exec bash -c 'package_chart_dependencies "$(dirname {})"' \;
+
+
+echo "moving .tgz files to docs folder"
+
+mv *.tgz ../docs
