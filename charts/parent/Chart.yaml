@@ -20,7 +20,7 @@ dependencies:
   version: 8.0.0
 - name: alfresco-repository
   repository: https://cbautistadev.github.io/alfresco-helm-charts/
-  version: 0.1.1
+  version: 0.1.2
 - condition: activemq.enabled
   name: activemq
   repository: https://cbautistadev.github.io/alfresco-helm-charts/
@@ -41,7 +41,7 @@ dependencies:
 - condition: alfresco-search-enterprise.enabled
   name: alfresco-search-enterprise
   repository: https://cbautistadev.github.io/alfresco-helm-charts/
-  version: 3.0.2
+  version: 3.0.3
 - condition: alfresco-connector-msteams.enabled
   name: alfresco-connector-msteams
   repository: https://cbautistadev.github.io/alfresco-helm-charts/
