@@ -3,7 +3,7 @@ entries:
   alfresco-content-services:
   - apiVersion: v2
     appVersion: 23.1.1
-    created: "2023-12-21T15:37:56.246352-08:00"
+    created: "2023-12-21T22:49:13.392866-08:00"
     dependencies:
     - name: alfresco-common
       repository: https://alfresco.github.io/alfresco-helm-charts/
@@ -23,8 +23,8 @@ entries:
       repository: https://activiti.github.io/activiti-cloud-helm-charts
       version: 8.0.0
     - name: alfresco-repository
-      repository: https://alfresco.github.io/alfresco-helm-charts/
-      version: 0.1.1
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
+      version: 0.1.2
     - condition: activemq.enabled
       name: activemq
       repository: https://cbautistadev.github.io/alfresco-helm-charts/
@@ -36,39 +36,39 @@ entries:
     - alias: alfresco-search
       condition: alfresco-search.enabled
       name: alfresco-search-service
-      repository: https://alfresco.github.io/alfresco-helm-charts/
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
       version: 2.0.0
     - condition: alfresco-sync-service.enabled
       name: alfresco-sync-service
-      repository: https://alfresco.github.io/alfresco-helm-charts/
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
       version: 4.5.1
     - condition: alfresco-search-enterprise.enabled
       name: alfresco-search-enterprise
-      repository: https://alfresco.github.io/alfresco-helm-charts/
-      version: 3.0.2
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
+      version: 3.0.3
     - condition: alfresco-connector-msteams.enabled
       name: alfresco-connector-msteams
-      repository: https://alfresco.github.io/alfresco-helm-charts/
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
       version: 0.2.0
     - alias: share
       condition: share.enabled
       name: alfresco-share
-      repository: https://alfresco.github.io/alfresco-helm-charts/
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
       version: 0.2.1
     - condition: alfresco-connector-ms365.enabled
       name: alfresco-connector-ms365
-      repository: https://alfresco.github.io/alfresco-helm-charts/
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
       version: 0.4.0
     - condition: alfresco-ai-transformer.enabled
       name: alfresco-ai-transformer
-      repository: https://alfresco.github.io/alfresco-helm-charts/
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
       version: 0.4.1
     - condition: elasticsearch.enabled
       name: elasticsearch
       repository: https://helm.elastic.co
       version: 7.17.3
     description: A Helm chart for deploying Alfresco Content Services
-    digest: 69cc3af2ebee9083409441770903604a1b40bee9afa14e52d7476b11c1c34601
+    digest: 6af5ce84a5f120aea8b7b24e4d4403d902ee2f9dfd013f7f000902dcccd259d6
     home: https://www.alfresco.com
     icon: https://avatars0.githubusercontent.com/u/391127?s=200&v=4
     keywords:
@@ -82,4 +82,4 @@ entries:
     urls:
     - https://cbautistadev.github.io/alfresco-helm-charts/parent/alfresco-content-services-7.0.1.tgz
     version: 7.0.1
-generated: "2023-12-21T15:37:56.218608-08:00"
+generated: "2023-12-21T22:49:13.357702-08:00"
