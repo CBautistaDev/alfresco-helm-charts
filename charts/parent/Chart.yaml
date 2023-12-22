@@ -36,7 +36,7 @@ dependencies:
   version: 2.0.0
 - condition: alfresco-sync-service.enabled
   name: alfresco-sync-service
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 4.5.1
 - condition: alfresco-search-enterprise.enabled
   name: alfresco-search-enterprise
@@ -49,7 +49,7 @@ dependencies:
 - alias: share
   condition: share.enabled
   name: alfresco-share
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 0.2.1
 - condition: alfresco-connector-ms365.enabled
   name: alfresco-connector-ms365
