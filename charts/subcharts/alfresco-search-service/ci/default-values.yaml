@@ -1,0 +1,6 @@
+---
+alfresco-insight-zeppelin:
+  nameOverride: zeppelin
+  enabled: true
+repository:
+  sharedSecret: dummy
