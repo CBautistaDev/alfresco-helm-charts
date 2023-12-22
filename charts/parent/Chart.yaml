@@ -44,7 +44,7 @@ dependencies:
   version: 3.0.2
 - condition: alfresco-connector-msteams.enabled
   name: alfresco-connector-msteams
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 0.2.0
 - alias: share
   condition: share.enabled
@@ -53,11 +53,11 @@ dependencies:
   version: 0.2.1
 - condition: alfresco-connector-ms365.enabled
   name: alfresco-connector-ms365
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 0.4.0
 - condition: alfresco-ai-transformer.enabled
   name: alfresco-ai-transformer
-  repository: https://alfresco.github.io/alfresco-helm-charts/
+  repository: https://cbautistadev.github.io/alfresco-helm-charts/
   version: 0.4.1
 - condition: elasticsearch.enabled
   name: elasticsearch
