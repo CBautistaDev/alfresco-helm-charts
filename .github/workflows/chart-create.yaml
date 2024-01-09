@@ -1,4 +1,4 @@
-#name of 
+#name of the workflow 
 name: Release Charts
 
 on:
