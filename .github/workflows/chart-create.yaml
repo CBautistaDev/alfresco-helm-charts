@@ -8,7 +8,19 @@ jobs:
         uses: actions/checkout@v4
       - name: Detect changed directories
         run: |
-         # List changed files and extract unique directories
-         CHANGED_DIRS=$(git diff --name-only HEAD^ HEAD | xargs -L1 dirname | uniq)
-         echo "Changed directories: $CHANGED_DIRS" 
-     
+          # List changed files and extract unique directories
+          # Get the SHA for the last commit. If it's the first commit, use an empty string as a default.
+          LAST_COMMIT_SHA=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+
+          # Check if the LAST_COMMIT_SHA is not empty
+            if [ -n "$LAST_COMMIT_SHA" ]; then
+                # If not the first commit, compare with the previous commit
+                CHANGED_DIRS=$(git diff --name-only $LAST_COMMIT_SHA HEAD | xargs -L1 dirname | uniq)
+            else
+                # If it's the first commit, list all directories
+                CHANGED_DIRS=$(git ls-tree -r --name-only HEAD | xargs -L1 dirname | uniq)
+            fi
+
+            echo "Changed directories: $CHANGED_DIRS"
+
+      
