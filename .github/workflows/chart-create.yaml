@@ -1,26 +1,36 @@
-name: Create and deploy charts
-on: [push, workflow_dispatch, pull_request ]
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  start:
+  release:
+    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
+    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: My first step - check out repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Detect changed directories
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
         run: |
-          # List changed files and extract unique directories
-          # Get the SHA for the last commit. If it's the first commit, use an empty string as a default.
-          LAST_COMMIT_SHA=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-          # Check if the LAST_COMMIT_SHA is not empty
-            if [ -n "$LAST_COMMIT_SHA" ]; then
-                # If not the first commit, compare with the previous commit
-                CHANGED_DIRS=$(git diff --name-only $LAST_COMMIT_SHA HEAD | xargs -L1 dirname | uniq)
-            else
-                # If it's the first commit, list all directories
-                CHANGED_DIRS=$(git ls-tree -r --name-only HEAD | xargs -L1 dirname | uniq)
-            fi
+      - name: Install Helm
+        uses: azure/setup-helm@v3
 
-            echo "Changed directories: $CHANGED_DIRS"
-
-      
+      - name: Run chart-releaser for subcharts
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          chart_path: ./charts/subchart
+          skip_existing_chart: false
+        
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
