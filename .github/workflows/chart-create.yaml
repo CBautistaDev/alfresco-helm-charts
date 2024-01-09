@@ -27,8 +27,8 @@ jobs:
       - name: Run chart-releaser for subcharts
         uses: helm/chart-releaser-action@v1.6.0
         with:
-          chart_path: ./charts/subchart
-          skip_existing_chart: false
+          charts_dir: ./charts/subchart
+          skip_existing: false
         
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
