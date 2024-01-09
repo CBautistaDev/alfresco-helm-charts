@@ -1,5 +1,5 @@
 name: Create and deploy charts
-on: [push, workflow_dispatch ]
+on: [push, workflow_dispatch, pull_request ]
 jobs:
   start:
     runs-on: ubuntu-latest
