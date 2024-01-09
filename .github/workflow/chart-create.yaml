@@ -1,0 +1,11 @@
+name: Create and deploy charts
+on: [push]
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: My first step - check out repository
+        uses: actions/checkout@v4
+      - name: Remove current Chart.Lock
+        run: 
+     
