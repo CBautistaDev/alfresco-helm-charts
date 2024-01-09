@@ -1,3 +1,4 @@
+#added comment
 global:
   alfrescoRegistryPullSecrets: quay-registry-secret
 strategy:
