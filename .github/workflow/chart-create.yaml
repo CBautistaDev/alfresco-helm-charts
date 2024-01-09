@@ -6,6 +6,9 @@ jobs:
     steps:
       - name: My first step - check out repository
         uses: actions/checkout@v4
-      - name: Remove current Chart.Lock
-        run: 
+      - name: Detect changed directories
+        run: |
+         # List changed files and extract unique directories
+         CHANGED_DIRS=$(git diff --name-only HEAD^ HEAD | xargs -L1 dirname | uniq)
+         echo "Changed directories: $CHANGED_DIRS" 
      
