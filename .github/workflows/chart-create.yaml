@@ -45,7 +45,7 @@ jobs:
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: ./charts/subchart
-          skip_existing: false
+          skip_existing: true
           mark_as_latest: true
           skip_packaging: true 
         env:
