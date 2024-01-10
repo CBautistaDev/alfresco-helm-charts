@@ -35,11 +35,10 @@ jobs:
             git rev-list --max-parents=0 --first-parent HEAD
           fi     
    
-      - name: custom packaging for subcharts 
-        run: | 
-           rm -rf .cr-release-packages
-           mkdir -p .cr-release-packages
-           helm package ./charts/subcharts/activemq --destination=.cr-release-packages
+ #     - name: custom packaging for subcharts 
+  ##        rm -rf .cr-release-packages
+    #       mkdir -p .cr-release-packages
+     #      helm package ./charts/subcharts/activemq --destination=.cr-release-packages
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
@@ -47,6 +46,6 @@ jobs:
           charts_dir: ./charts/subchart
           skip_existing: true
           mark_as_latest: true
-          skip_packaging: true 
+          skip_packaging: false
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
