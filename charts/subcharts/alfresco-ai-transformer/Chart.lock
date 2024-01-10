@@ -1,9 +1,0 @@
-dependencies:
-- name: alfresco-common
-  repository: https://alfresco.github.io/alfresco-helm-charts/
-  version: 2.1.0
-- name: activemq
-  repository: https://cbautistadev.github.io/alfresco-helm-charts/
-  version: 3.4.1
-digest: sha256:31724d5d9304399dc1193d601a87ad57d09b309443d75755ab52cacf50c49d5c
-generated: "2023-12-21T16:28:53.468375-08:00"
