@@ -31,14 +31,14 @@ jobs:
         run: | 
            rm -rf .cr-release-packages
            mkdir -p .cr-release-packages
-           helm package ./charts/subcharts --destination=.cr-release-packages
+           helm package ./charts/subcharts/activemq --destination=.cr-release-packages
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: ./charts/subchart
           skip_existing: false
-          mark_as_latest: false
+          mark_as_latest: true
           skip_packaging: true 
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
