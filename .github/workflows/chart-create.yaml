@@ -3,6 +3,8 @@ name: Release Charts
 
 on:
   push:
+  workflow_dispatch:
+    
 
 jobs:
   release:
