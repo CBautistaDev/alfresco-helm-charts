@@ -1,10 +1,9 @@
-#name of the workflow 
 name: Release Charts
 
 on:
   push:
-  workflow_dispatch:
-    
+    branches:
+      - main
 
 jobs:
   release:
@@ -15,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -27,18 +26,10 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3
 
-      - name: custom packaging for subcharts 
-        run: | 
-           rm -rf .cr-release-packages
-           mkdir -p .cr-release-packages
-           helm package ./charts/subcharts/activemq --destination=.cr-release-packages
-
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
-          charts_dir: ./charts/subchart
-          skip_existing: false
-          mark_as_latest: true
-          skip_packaging: true 
+          chart_dir: ./charts/subchart
+          config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
