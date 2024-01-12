@@ -37,10 +37,10 @@ jobs:
             rm -rf .cr-release-packages
             mkdir -p .cr-release-packages
             helm package ./charts/subcharts/activemq --destination=.cr-release-packages
-
+            helm package ./charts/subcharts/alfresco-ai-transformer --destination=.cr-release-packages 
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
+        uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: ./charts/subchart
           config: cr.yaml
