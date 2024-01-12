@@ -42,7 +42,9 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
-          chart_dir: ./charts/subchart
+          charts_dir: ./charts/subchart
           config: cr.yaml
+          skip_packaging: true
+          skip_existing: false
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
