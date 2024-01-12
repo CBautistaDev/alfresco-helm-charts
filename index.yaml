@@ -21,4 +21,23 @@ entries:
     urls:
     - https://github.com/CBautistaDev/alfresco-helm-charts/releases/download/activemq-3.4.1/activemq-3.4.1.tgz
     version: 3.4.1
-generated: "2024-01-10T04:05:36.982263004Z"
+  alfresco-ai-transformer:
+  - apiVersion: v2
+    appVersion: 3.0.1
+    created: "2024-01-12T01:06:24.810404864Z"
+    dependencies:
+    - name: alfresco-common
+      repository: https://alfresco.github.io/alfresco-helm-charts/
+      version: 2.1.0
+    - condition: activemq.enabled
+      name: activemq
+      repository: https://cbautistadev.github.io/alfresco-helm-charts/
+      version: 3.4.1
+    description: A Helm chart for deploying Alfresco ai transformer service
+    digest: dc2e4aa4ab4f55d61c1cefde509439d0cb7b4857a5a58a9a552044958794d125
+    name: alfresco-ai-transformer
+    type: application
+    urls:
+    - https://github.com/CBautistaDev/alfresco-helm-charts/releases/download/alfresco-ai-transformer-0.4.1/alfresco-ai-transformer-0.4.1.tgz
+    version: 0.4.1
+generated: "2024-01-12T01:06:24.810412859Z"
