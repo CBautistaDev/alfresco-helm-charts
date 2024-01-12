@@ -40,7 +40,7 @@ jobs:
 
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
+        uses: helm/chart-releaser-action@v1.5.0
         with:
           charts_dir: ./charts/subchart
           config: cr.yaml
